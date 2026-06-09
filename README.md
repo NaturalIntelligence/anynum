@@ -34,9 +34,6 @@ npm install anynum
 import anynum from 'anynum';
 import { anynum } from 'anynum';
 
-// CJS
-const { anynum } = require('anynum');
-const anynum = require('anynum').default;
 ```
 
 ### API
@@ -100,26 +97,6 @@ strnum(anynum('hello'))   // → 'hello'
 
 ---
 
-## Performance
-
-Benchmarked on Node.js v22, Apple M-series:
-
-| Input | Speed |
-|---|---|
-| ASCII digits (fast path, no allocation) | ~23M ops/sec |
-| ASCII string, no digits (fast path) | ~16M ops/sec |
-| Devanagari 10 digits | ~2.6M ops/sec |
-| Arabic-Indic 10 digits | ~2.6M ops/sec |
-| Fullwidth 10 digits | ~2.6M ops/sec |
-| Math Bold digits (surrogate pairs) | ~2.2M ops/sec |
-
-**Fast path**: strings that require no conversion (all-ASCII digits, no Unicode minus variants) are detected in a single scan and the original string is returned — no new string is allocated.
-
-**Lookup strategy**:
-- BMP digits (`U+0660`–`U+FFFF`): flat `Uint8Array` indexed by code point — single array access per character.
-- Supplementary plane digits (`U+10000`+, encoded as surrogate pairs): `Map` lookup — only reached for the small set of mathematical digit variants.
-
----
 
 ## Supported scripts
 
