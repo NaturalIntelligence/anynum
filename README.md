@@ -1,4 +1,5 @@
 # anynum
+![anynum](https://img.shields.io/npm/dm/anynum?label=anynum&color=darkgreen)
 
 Normalize Unicode decimal digits and minus signs to ASCII.
 
